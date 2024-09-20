@@ -24,4 +24,12 @@ export class CreateRecadoDto {
   @MinLength(3)
   @MaxLength(50)
   readonly to: string;
+
+  @IsNotEmpty()
+  readonly readed: boolean;
+
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(50)
+  readonly date: string;
 }

@@ -10,10 +10,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { RecadosService } from './recados.service';
-import { Recado } from './entities/recado.entity';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
+import { RecadosService } from './recados.service';
 
 @Controller('recados')
 export class RecadosController {
@@ -24,7 +23,7 @@ export class RecadosController {
     return this.recadosService.findAll();
   }
   @Get(':id')
-  findOne(@Param('id') id: string): Recado {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.recadosService.findOne(id);
   }
   @Post()
@@ -34,9 +33,9 @@ export class RecadosController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateRecadoDto: UpdateRecadoDto,
-  ): Recado {
+  ) {
     return this.recadosService.update(id, updateRecadoDto);
   }
 
